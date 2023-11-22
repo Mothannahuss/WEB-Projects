@@ -1,0 +1,24 @@
+p
+{
+    font-size:xx-large;
+
+    padding-top:2em;
+
+    color: #007d40;
+
+}
+@media only screen and (max-width: 1200px)
+{
+    p
+    {
+        font-size:medium;
+    }
+}
+th
+{
+    color: #007d40;
+}
+.center
+{
+    text-align:center;
+}

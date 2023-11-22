@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Reschedule
+{% endblock %}
+
+{% block main %}
+    <div class="table-responsive-md">
+        <table class="table">
+            <tr>
+                <th scope="col" style="color: #007d40;">Room number</th>
+                <th scope="col" style="color: #007d40;">Building</th>
+                <th scope="col" style="color: #007d40;">Date</th>
+                <th scope="col" style="color: #007d40;">Start/End</th>
+                <th scope="col" style="color: #007d40;"></th>
+            </tr>
+            <tbody>
+                {% for info in information %}
+                        <tr scope="row">
+                            <td >
+                                {{info.number}}
+                            </td>
+                            <td >
+                                {{info.building}}
+                            </td>
+                            <td>
+                                {{info.date}}
+                            </td>
+                            <td>
+                                {{info.start}} / {{info.end}}
+                            </td>
+                            <td>
+                                <form action="/change" method="post">
+                                     <input name="number" type="hidden" value="{{ info.number }}">
+                                     <input name="building" type="hidden" value="{{ info.building }}">
+                                     <input name="date" type="hidden" value="{{ info.date }}">
+                                     <input name="start/end" type="hidden" value="{{ info.start}}/{{ info.end}}">
+                                     <input type="submit" value="Reschedule" class="btn btn-success btn-sm">
+                                </form>
+                            </td>
+                        </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    History
+{% endblock %}
+
+{% block main %}
+    <table class="table" id="myTable">
+        <tr>
+            <th scope="col">Type</th>
+            <th scope="col">Building</th>
+            <th scope="col">Room</th>
+            <th scope="col">Date</th>
+          </tr>
+          <tbody>
+            {% for info in information %}
+                <tr scope="row">
+                  <td>
+                    {{info["type"]}}
+                  </td>
+                  <td>
+                    {{info["building"]}}
+                  </td>
+                  <td>
+                    {{info["number"]}}
+                  </td>
+                  <td>
+                    {{info["date"]}}
+                  </td>
+                </tr>
+            {% endfor %}
+          </tbody>
+    </table>
+{% endblock %}

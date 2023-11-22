@@ -1,0 +1,10 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Apology
+{% endblock %}
+
+{% block main %}
+    <!-- https://memegen.link/ -->
+    <img alt="{{ top }}" class="border img-fluid" src=" https://api.memegen.link/images/custom/{{ top | urlencode }}/{{ bottom | urlencode }}.gif?background=https%3A%2F%2Fc.tenor.com%2Fhwe3vkln0_UAAAAC%2Ferror-x-error.gif&watermark=memecomplete.com&token=wvnyyxujnw61ynh00img ">
+{% endblock %}

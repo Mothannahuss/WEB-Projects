@@ -1,0 +1,114 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Find classrooms
+{% endblock %}
+
+{% block main %}
+    <form action="/found" method="post">
+        <div class="mb-3">
+            <input type = "text" readonly autofocus class="form-control mx-auto w-auto" id="date" name="date" value="{{date}}">
+        </div>
+        <div class="mb-3">
+            <input type = "text" readonly autofocus class="form-control mx-auto w-auto" id="building" name="building" value="{{building}}">
+        </div>
+        <div class="mb-3">
+            <input type = "text" autofocus readonly class="form-control mx-auto w-auto" id="room" name="room" value="{{room}}">
+        </div>
+        <div class="mb-3">
+            <select id="menue1" name = "start" class="form-select  mx-auto w-auto" >
+                    <option selected disabled>
+                        From
+                    </option>
+                    {% for i in starts %}
+                        {% if starts[i] == "av" %}
+                            <option>
+                                {{i}} PM
+                            </option>
+                        {% else %}
+                            <option disabled>
+                                {{i}} PM
+                            </option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="mb-3">
+                <select id="menue2" name = "end" class="form-select mx-auto w-auto">
+                    <option selected disabled id="To">
+                        To
+                    </option>
+                    {% for i in ends %}
+                        {% if ends[i] == "av" %}
+                            {% if i < 12 %}
+                                <option>
+                                    {{i}} PM
+                                </option>
+                            {% else %}
+                                <option>
+                                    {{i}} AM
+                                </option>
+                            {% endif %}
+                        {% else %}
+                            {% if i < 12 %}
+                                <option disabled id="flaged">
+                                    {{i}} PM
+                                </option>
+                            {% else %}
+                                <option disabled id="flaged">
+                                    {{i}} AM
+                                </option>
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </div>
+        <button class="btn btn-success" type="submit">Reserve</button>
+        <input name="resId" type="hidden" value="{{resId}}">
+    </form>
+    <script>
+        /// manage function to disable end times that are less than starting time
+        function manage()
+        {
+            var m1 = document.getElementById("menue1");
+
+            var m2 = document.getElementById("menue2");
+
+            m2.value = "To";
+
+            m2 = m2.options;
+
+            m2[0].disabled = true;
+
+            value = Number(m1.value.substring(0,2).trim());
+
+            for (let i = 1; i < m2.length; i++)
+            {
+                ///If the option is disabled according to other reservations
+                if (m2[i].id == "flaged")
+                {
+                    continue;
+                }
+                var v = Number(m2[i].value.substring(0,2).trim());
+
+                if (v <= value)
+                {
+                    m2[i].disabled = true;
+                }
+                else
+                {
+                    m2[i].disabled = false;
+                }
+            }
+
+        }
+        document.querySelector("#menue1").addEventListener("change", manage);
+    </script>
+    <div class="container-sm" style="padding-top:2em; display: flex; justify-content: center;">
+        <div class="alert alert-success" role="alert" >
+            You are fully responsible of the classroom's condition by the time you leave it
+            <hr>
+            Only available timings will be enabled
+        </div>
+    </div>
+{% endblock %}

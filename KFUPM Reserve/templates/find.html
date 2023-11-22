@@ -1,0 +1,57 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Find classrooms
+{% endblock %}
+
+{% block main %}
+    <form action="/find" method="post">
+        <div class="mb-3">
+            <input type = "date" autofocus class="form-control mx-auto w-auto" id="date" name="date" placeholder="Date">
+        </div>
+        <div class="mb-3">
+            <select name = "building" class="form-select mx-auto w-auto">
+                <option selected disabled>
+                    Building
+                </option>
+                {% for i in [22,24,59,63,76] %}
+                <option>
+                    {{i}}
+                </option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mb-3">
+            <select name = "room" class="form-select mx-auto w-auto">
+                <option selected disabled>
+                    Room
+                </option>
+                {% for i in range(1,51) %}
+                <option>
+                    {{i}}
+                </option>
+                {% endfor %}
+            </select>
+        </div>
+        <button type="submit" class="btn btn-success">Look Up</button>
+    </form>
+    <script>
+            var todayDate = new Date();
+
+            var month = todayDate.getMonth()+1;
+
+            var year = todayDate.getUTCFullYear() - 0;
+
+            var today = todayDate.getDate();
+
+            if (month < 10){
+                month = "0" + month
+            }
+            if (today < 10){
+                today = "0" + today;
+            }
+            var maxDate = year + "-" + month + "-" + today;
+
+            document.getElementById("date").setAttribute("min", maxDate);
+    </script>
+{% endblock %}
