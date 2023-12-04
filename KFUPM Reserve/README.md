@@ -5,8 +5,7 @@ Since there is a high demand for classrooms by student groups in my university (
 - Services avilable only by registration.
 - Reservation times depend on other reservations and local time in saudi if the date is today.
 
-### Video Demo
-https://youtu.be/V3DX5J83ZTs
+
 ### Features
 - Lookup and reserve rooms
 - Cancel reservations
